@@ -23,12 +23,13 @@ public class LoginFilter implements Filter {
 			throws IOException, ServletException {
 		// TODO 自動生成されたメソッド・スタブ
 
-		// ログインしていない場合はアクセス不可
 		if (!lUser.loginStatus()) {
+			// ログインしていない場合はトップページにリダイレクト
 			HttpServletRequest req = (HttpServletRequest) request;
 			HttpServletResponse res = (HttpServletResponse) response;
 			res.sendRedirect(req.getContextPath() + "/faces/00.xhtml");
 		} else {
+			// ログインしている場合は次のフィルタへ
 			chain.doFilter(request, response);
 		}
 	}
